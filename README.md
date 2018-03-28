@@ -28,3 +28,43 @@ public java.lang.String toString() {
 
 
 
+## Intellij IDEA get set模板设置
+
+因为 Intellij IDEA 对 boolean 类型 get set 的处理，如果 boolean 类型字段名是 is 开头的，生成的 get set 方法会自动去掉 is，这个在很多时候对我们造成了困扰，在 Intellij IDEA 的 get set 窗口可以自定义模板：
+
+get 模板：
+
+```
+#if($field.modifierStatic)
+static ##
+#end
+$field.type ##
+#set($name = $StringUtil.capitalizeWithJavaBeanConvention($field.name))
+get##
+${name}() {
+return $field.name;
+}
+```
+
+set 模板：
+
+```
+#set($paramName = $field.name)
+#if($field.modifierStatic)
+static ##
+#end
+void set$StringUtil.capitalizeWithJavaBeanConvention($field.name)($field.type $paramName) {
+#if ($field.name == $paramName)
+    #if (!$field.modifierStatic)
+    this.##
+    #else
+        $classname.##
+    #end
+#end
+$field.name = $paramName;
+}
+```
+
+
+
+
