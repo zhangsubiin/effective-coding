@@ -67,4 +67,14 @@ $field.name = $paramName;
 
 
 
+## IDEA import 配置
+
+IDEA默认会对import 同包下进行归并处理 import * ，需要在: 设置->Editor->Code Style->Java Importstab页将 Class Count to use import with * 和 Names count to use static import with * 后面的数字设的大一点，比如500，这样就不会自动import *
+
+
+
+## MyBatis
+
+可以使用 Mybatis Generator 生成相应的文件，但是禁止使用Example 动态查询语句，虽然带来了很大的便利性但是sql语句太灵活了极容易造成慢sql，而且不方便sql review，以及后续的索引优化。
+
 
